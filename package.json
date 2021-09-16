@@ -1,0 +1,83 @@
+{
+  "name": "vite-vue-h5-app",
+  "version": "0.0.0",
+  "license": "ISC",
+  "scripts": {
+    "dev": "vite --host",
+    "build:prod": "vite build --mode production",
+    "tsc": "vue-tsc --noEmit",
+    "serve": "vite preview",
+    "prepare": "husky install",
+    "commit": "git-cz",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix",
+    "stylelint": "stylelint  ./src/**/*.{scss,css,less,vue} --fix",
+    "prettier": "prettier . --write"
+  },
+  "dependencies": {
+    "accounting": "^0.4.1",
+    "axios": "^0.21.4",
+    "dayjs": "^1.10.7",
+    "good-storage": "^1.1.1",
+    "js-cookie": "^3.0.1",
+    "numeral": "^2.0.6",
+    "vant": "^3.2.3",
+    "vue": "^3.2.6",
+    "vue-router": "^4.0.11",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
+    "@types/accounting": "^0.4.2",
+    "@types/good-storage": "^1.1.0",
+    "@types/js-cookie": "^2.2.7",
+    "@types/node": "^16.9.1",
+    "@types/numeral": "^2.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
+    "@vitejs/plugin-legacy": "^1.5.3",
+    "@vitejs/plugin-vue": "^1.6.1",
+    "@vitejs/plugin-vue-jsx": "^1.1.8",
+    "@vue/compiler-sfc": "^3.2.6",
+    "@vue/eslint-config-typescript": "^7.0.0",
+    "autoprefixer": "8.6.5",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "cz-customizable": "^6.3.0",
+    "eslint": "^5.16.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-vue": "^7.17.0",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2",
+    "mockjs": "^1.1.0",
+    "postcss": "7.0.32",
+    "postcss-px-to-viewport": "^1.1.1",
+    "prettier": "^2.4.0",
+    "sass": "^1.41.0",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-order": "^4.1.0",
+    "stylelint-scss": "^3.21.0",
+    "typescript": "^4.3.2",
+    "vconsole": "^3.9.1",
+    "vite": "^2.5.4",
+    "vite-plugin-compression": "^0.3.5",
+    "vite-plugin-html": "^2.1.0",
+    "vite-plugin-mock": "^2.9.6",
+    "vite-plugin-svg-icons": "^1.0.4",
+    "vue-eslint-parser": "^7.11.0",
+    "vue-tsc": "^0.2.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-customizable"
+    }
+  },
+  "lint-staged": {
+    "*{.js,.jsx,.ts,.tsx}": [
+      "npm run prettier",
+      "npm run lint"
+    ]
+  }
+}
