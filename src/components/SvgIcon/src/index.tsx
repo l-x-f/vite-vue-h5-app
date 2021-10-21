@@ -16,7 +16,7 @@ export default defineComponent({
       type: String,
       default: ''
     },
-    fontSize: {
+    fontsize: {
       type: String,
       default: '12px'
     }
@@ -32,10 +32,10 @@ export default defineComponent({
     })
     return () => (
       <svg
-        id='svg-icon'
-        style={{ fontSize: props.fontSize }}
+        id="svg-icon"
+        style={{ fontSize: props.fontsize }}
         class={svgClass.value}
-        aria-hidden='true'
+        aria-hidden="true"
         {...attrs}
       >
         <use xlinkHref={iconName.value} fill={props.fill} />

@@ -11,7 +11,11 @@
     "commit": "git-cz",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix",
     "stylelint": "stylelint  ./src/**/*.{scss,css,less,vue} --fix",
-    "prettier": "prettier . --write"
+    "prettier": "prettier . --write",
+    "test:unit": "cypress open-ct",
+    "test:unit:ci": "cypress run-ct --quiet --reporter spec",
+    "test:e2e": "start-server-and-test serve 5050 'cypress open'",
+    "test:e2e:ci": "start-server-and-test serve 5050 'cypress run'"
   },
   "dependencies": {
     "accounting": "^0.4.1",
@@ -28,10 +32,12 @@
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
+    "@cypress/vite-dev-server": "^2.1.1",
+    "@cypress/vue": "^3.0.3",
     "@types/accounting": "^0.4.2",
     "@types/good-storage": "^1.1.0",
     "@types/js-cookie": "^2.2.7",
-    "@types/node": "^16.9.1",
+    "@types/node": "^16.11.1",
     "@types/numeral": "^2.0.1",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
@@ -42,6 +48,7 @@
     "@vue/eslint-config-typescript": "^7.0.0",
     "autoprefixer": "8.6.5",
     "commitizen": "^4.2.4",
+    "cypress": "^8.5.0",
     "cz-conventional-changelog": "^3.3.0",
     "cz-customizable": "^6.3.0",
     "eslint": "^5.16.0",
@@ -55,6 +62,7 @@
     "postcss-px-to-viewport": "^1.1.1",
     "prettier": "^2.4.0",
     "sass": "^1.41.0",
+    "start-server-and-test": "^1.14.0",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^22.0.0",
     "stylelint-order": "^4.1.0",

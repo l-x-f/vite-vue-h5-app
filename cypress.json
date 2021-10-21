@@ -1,0 +1,9 @@
+{
+  "baseUrl": "http://localhost:5050",
+  "component": {
+    "componentFolder": "./",
+    "testFiles": "__tests__/**/*.spec.{js,ts,jsx,tsx}"
+  },
+  "viewportWidth": 375,
+  "viewportHeight": 812
+}
