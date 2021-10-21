@@ -33,6 +33,6 @@ export default defineComponent({
         getHtml(val)
       }
     )
-    return () => <div class='html-parse-component' v-html={state.content}></div>
+    return () => <div class="html-parse-component" v-html={state.content}></div>
   }
 })
