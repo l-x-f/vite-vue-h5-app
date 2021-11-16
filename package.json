@@ -1,7 +1,8 @@
 {
   "name": "vite-vue-h5-app",
-  "version": "0.0.0",
-  "license": "ISC",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "xiaofei",
   "scripts": {
     "dev": "vite --host",
     "build:prod": "vite build --mode production",

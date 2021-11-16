@@ -12,6 +12,7 @@ Vue 3 + Typescript + Vite + Vant
 .
 ├── README.md                           #项目简介
 ├── commitlint.config.js                #commitlint配置
+├── cypress                             #单元测试 端到端测试
 ├── index.html                          #页面入口
 ├── mock                                #mock
 ├── package.json                        #package
