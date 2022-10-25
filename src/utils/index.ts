@@ -1,4 +1,5 @@
-import dayjs, { QUnitType, OpUnitType, ConfigType } from 'dayjs'
+import type { QUnitType, OpUnitType, ConfigType } from 'dayjs'
+import dayjs from 'dayjs'
 import numeral from 'numeral'
 import accounting from 'accounting'
 

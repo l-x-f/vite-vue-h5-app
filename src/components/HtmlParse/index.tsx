@@ -1,6 +1,6 @@
 import { defineComponent, onMounted, reactive, watch } from 'vue'
 import axios from 'axios'
-import './index.scss'
+import './index.less'
 
 export default defineComponent({
   name: 'HtmlParse',

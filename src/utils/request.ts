@@ -1,6 +1,7 @@
-import store from '/@/store'
-import axios, { AxiosResponse } from 'axios'
+import type { AxiosResponse } from 'axios'
+import axios from 'axios'
 import { Toast } from 'vant'
+import { useUserStore } from '@/store'
 
 const baseURL = import.meta.env.VITE_APP_BASE_API as string
 // 创建 axios 实例
@@ -18,12 +19,13 @@ const errorHandler = (error: { message: string }) => {
 
 // 请求拦截器
 request.interceptors.request.use(config => {
-  const { token } = store.getters
+  const { token } = useUserStore()
+  const headers = { ...config.headers }
   // 如果 token 存在
   if (token) {
-    config.headers.token = token
+    headers.token = token
   }
-  return config
+  return { ...config, headers }
 }, errorHandler)
 
 // 响应拦截器
@@ -32,10 +34,9 @@ request.interceptors.response.use(
     const data = response.data
     if (data.code && data.code !== 200) {
       if (data.code === 501) {
-        const hasRedirect = true
-        store.dispatch('user/logout', hasRedirect)
+        const store = useUserStore()
+        store.logout()
       }
-
       Toast.fail(data.message || 'error')
       return Promise.reject(new Error(data.message || 'Error'))
     }

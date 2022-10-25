@@ -21,9 +21,19 @@ declare interface IObject<T> {
 }
 
 /**
+ * 普通的对象的泛型
+ */
+declare type RecordType<T = any> = Record<string, T>
+
+/**
+ * 带签名的对象的泛型
+ */
+declare type RecordIndexType<T = any> = Record<string, T> & { [index: string]: T }
+
+/**
  * 允许null的泛型
  */
-declare type Nullable<T> = T | null
+declare type NullAble<T> = T | null
 
 /**
  * 接口数据响应类型

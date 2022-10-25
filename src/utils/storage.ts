@@ -3,12 +3,12 @@ import storage from 'good-storage'
 const UserInfoKey = 'User-Info'
 
 // 设置用户信息
-export const setUserInfo = (data: any): void => {
+export const setUserInfo = (data: IUserStoreState): void => {
   storage.set(UserInfoKey, data)
 }
 
 // 获取用户信息
-export function getUserInfo(): IStoreUserState['userInfo'] {
+export function getUserInfo(): IUserStoreState {
   return storage.get(UserInfoKey) || {}
 }
 

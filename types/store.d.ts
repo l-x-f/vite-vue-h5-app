@@ -1,20 +1,13 @@
 /**
  * 用户状态类型
  */
-declare interface IStoreUserState {
-  token: string
-  userInfo: any
+declare interface IUserStoreState {
+  token?: string
+  userInfo: {
+    username: string
+    id?: number
+    password: string
+  }
 }
 
-/**
- * Getters 状态
- */
-declare interface IStoreGetters extends IStoreUserState {}
-
-/**
- * vuex 整体状态类型
- */
-
-declare interface IStoreState {
-  user: IStoreUserState
-}
+declare type IUserUserInfo = IUserStoreState['userInfo']

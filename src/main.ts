@@ -1,17 +1,18 @@
 import { createApp } from 'vue'
-import router from '/@/router'
-import store, { key } from '/@/store'
 
-import Vant from 'vant'
-import 'vant/lib/index.css'
+import { createPinia } from 'pinia'
 
 // 全局样式
-import '/@/styles/index.scss'
+import '@/styles/index.less'
+
+import router from '@/router'
 
 // 路由守卫，动态路由处理
-import '/@/router/router-guards'
+import '@/router/router-guards'
 import App from './App.vue'
 
 const app = createApp(App)
 
-app.use(router).use(store, key).use(Vant).mount('#app')
+const store = createPinia()
+
+app.use(router).use(store).mount('#app')

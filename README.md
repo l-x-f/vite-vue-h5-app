@@ -34,6 +34,7 @@ Vue 3 + Typescript + Vite + Vant
 ├── types                               #ts类型
 ├── tsconfig.json                       #ts项目配置
 ├── update.sh                           #提交代码脚本
+├── viteConfig                          #vite配置
 ├── vite.config.ts                      #vite项目配置
 └── yarn.lock                           #npm包版本锁定
 ```

@@ -10,10 +10,10 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "lib": ["esnext", "dom"],
-    "types": ["vite/client", "node"],
+    "types": ["vite/client", "node", "unplugin-vue-define-options/macros-global"],
     "baseUrl": ".",
     "paths": {
-      "/@/*": ["src/*"]
+      "@/*": ["src/*"]
     }
   },
   "include": [
@@ -22,7 +22,8 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "types/*.d.ts",
-    "__tests__"
+    "__tests__",
+    "viteConfig"
   ],
   "exclude": ["node_modules", "dist"]
 }

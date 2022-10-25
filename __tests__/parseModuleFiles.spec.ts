@@ -1,6 +1,6 @@
 import { parseModuleFiles } from '../src/utils/parseModuleFiles'
-const moduleFiles = import.meta.globEager('../src/store/modules/*.ts')
-const modules = parseModuleFiles(moduleFiles)
+const moduleFiles = import.meta.glob('../src/store/modules/*.ts', { eager: true })
+const modules = parseModuleFiles(moduleFiles as any)
 
 console.log(modules)
 

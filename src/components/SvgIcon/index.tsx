@@ -1,5 +1,5 @@
 import { computed, defineComponent } from 'vue'
-import './index.scss'
+import './index.less'
 
 export default defineComponent({
   name: 'SvgIcon',

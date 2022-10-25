@@ -1,9 +1,9 @@
-import { MockMethod } from 'vite-plugin-mock'
+import type { MockMethod } from 'vite-plugin-mock'
 import chalk from 'chalk'
 
 // 登录
 const login = {
-  url: '/doLogin',
+  url: '/api/login',
   method: 'post',
   response: () => {
     return {
@@ -11,7 +11,11 @@ const login = {
       success: true,
       message: '登录成功',
       data: {
-        token: 'fsa45f4563f4a6f4-fsa45f4563f4a6f4-fsa45f4563f4a6f4'
+        token: 'fsa45f4563f4a6f4-fsa45f4563f4a6f4-fsa45f4563f4a6f4',
+        userInfo: {
+          username: 'admin',
+          id: 1
+        }
       }
     }
   }
@@ -20,7 +24,7 @@ const login = {
 // 退出
 const logout = {
   url: '/api/logout',
-  method: 'post',
+  method: 'get',
   message: '退出成功',
   response: {
     code: 200,

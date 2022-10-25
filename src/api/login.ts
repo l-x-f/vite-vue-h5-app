@@ -1,13 +1,13 @@
-import request from '/@/utils/request'
-
+import type { AxiosResponse } from 'axios'
+import request from '@/utils/request'
 /**
  *  登录
  * @param data
  * @returns
  */
-export function login(data: any): Promise<any> {
+export function login(data: RecordType): Promise<AxiosResponse<any>> {
   return request({
-    url: '/doLogin',
+    url: '/login',
     method: 'post',
     data
   })
@@ -17,9 +17,9 @@ export function login(data: any): Promise<any> {
  * 退出
  * @returns
  */
-export function loginout(): IApiResponse {
+export function logout(): IApiResponse {
   return request({
-    url: '/loginOut',
+    url: '/logout',
     method: 'get'
   })
 }

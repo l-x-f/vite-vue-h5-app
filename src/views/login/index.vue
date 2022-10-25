@@ -1,6 +1,7 @@
 <template>
   <div class="login">
     <div class="login-container">
+      <h1 class="title">{{ title }}</h1>
       <van-form @submit="submitForm">
         <van-cell-group inset>
           <van-field
@@ -29,10 +30,10 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, reactive, toRefs } from 'vue'
+<script lang="ts" setup>
+import { reactive, toRefs } from 'vue'
 import { useRouter } from 'vue-router'
-// import { useStore } from '/@/store'
+import { useUserStore } from '@/store'
 
 /**
  * 登录界面类型
@@ -45,50 +46,55 @@ interface ILoginState {
   }
 }
 
-export default defineComponent({
-  name: 'Login',
-  setup() {
-    const router = useRouter()
-    // const store = useStore()
-    const state = reactive<ILoginState>({
-      loading: false,
-      loginForm: {
-        userName: '',
-        password: ''
-      }
-    })
-    // 登录
-    const submitForm = async () => {
-      try {
-        state.loading = true
-        // await store.dispatch('user/login', state.loginForm)
-        router.push('/home')
-      } catch (error) {
-        console.log(error, 'e')
-      }
-      state.loading = false
-    }
+const title = import.meta.env.VITE_APP_DEFAULT_TITLE
 
-    return {
-      ...toRefs(state),
-      submitForm
-    }
+const router = useRouter()
+const store = useUserStore()
+const state = reactive<ILoginState>({
+  loading: false,
+  loginForm: {
+    userName: '',
+    password: ''
   }
 })
+// 登录
+const submitForm = async () => {
+  try {
+    state.loading = true
+    await store.login(state.loginForm)
+    router.push('/home')
+  } catch (error) {
+    console.log(error, 'e')
+  }
+  state.loading = false
+}
+
+const { loading, loginForm } = toRefs(state)
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="less">
 .login {
   height: 100vh;
   width: 100%;
+  background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   background-repeat: no-repeat;
   background-size: cover;
 
+  .title {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
   .submit-button-row {
     margin-top: 16px;
+  }
+
+  :deep(.van-cell-group) {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 </style>

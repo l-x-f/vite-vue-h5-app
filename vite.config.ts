@@ -1,99 +1,76 @@
-import { resolve } from 'path'
-import { defineConfig, loadEnv, UserConfigExport, ConfigEnv } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-import legacy from '@vitejs/plugin-legacy'
-import html from 'vite-plugin-html'
-import viteCompression from 'vite-plugin-compression'
-import viteSvgIcons from 'vite-plugin-svg-icons'
-import { viteMockServe } from 'vite-plugin-mock'
+import { fileURLToPath, URL } from 'url'
+import type { UserConfigExport, ConfigEnv, BuildOptions } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
+import type { RegisterPluginsParams } from './viteConfig'
+import { registerPlugins, manualChunks } from './viteConfig'
+import pkg from './package.json'
 
-const pathResolve = (dir: string): string => resolve(__dirname, '.', dir)
+export const pathResolve = (dir: string): string => fileURLToPath(new URL(dir, import.meta.url))
+
+/**
+ * 静态文件目录
+ */
+const assetsDir = 'assets'
 
 // https://vitejs.dev/config/
 const config = ({ command, mode }: ConfigEnv): UserConfigExport => {
   // 环境变量
-  const env = loadEnv(mode, process.cwd())
+  const env = loadEnv(mode, process.cwd()) as unknown as RegisterPluginsParams['env']
   // 生产环境判断
-  const isEnvProduction = mode === 'production'
-  // vite插件
-  const plugins = [
-    vue(),
-    vueJsx(),
-    html({
-      inject: {
-        injectData: { ...env }
-      },
-      minify: true
-    }),
-    viteSvgIcons({
-      // 指定需要缓存的图标文件夹
-      iconDirs: [pathResolve('src/icons')],
-      // 指定symbolId格式
-      symbolId: 'icon-[name]'
-    })
-  ]
+  const isEnvProduction = process.env.VITE_USER_NODE_ENV === 'production'
 
-  if (isEnvProduction) {
-    plugins.push(
-      // 兼容插件
-      legacy({
-        targets: ['defaults', 'not IE 11']
-      }),
-      // gzip插件
-      viteCompression({
-        filter: /\.(js|css)$/i,
-        algorithm: 'brotliCompress',
-        threshold: 10 * 1024 // 10kb
-      })
-    )
-  } else {
-    plugins.push(
-      viteMockServe({
-        mockPath: 'mock',
-        localEnabled: command === 'serve',
-        logger: true
-      })
-    )
+  // 环境变量
+  const envParams = { ...env }
+
+  // 注册插件(方法)参数
+  const options: RegisterPluginsParams = {
+    env: envParams,
+    isEnvProduction,
+    command,
+    pathResolve
   }
+
+  // 打包配置
+  const build = {
+    target: 'es2015',
+    outDir: 'dist',
+    assetsDir,
+    assetsInlineLimit: 2048,
+    cssCodeSplit: true,
+    brotliSize: false,
+    chunkSizeWarningLimit: 2000,
+    minify: isEnvProduction ? 'terser' : 'esbuild',
+    rollupOptions: {
+      output: { manualChunks }
+    }
+  } as BuildOptions
+
+  // 生产环境去除console
+  isEnvProduction && (build.terserOptions = { compress: { drop_console: true } })
+
+  // 生成程序版本号
+  const version = JSON.stringify(`v${pkg.version}`)
 
   return defineConfig({
     base: './',
-    plugins,
+    plugins: registerPlugins(options),
+    define: {
+      __APP_VERSION__: version
+    },
     server: {
-      port: 8383,
-      open: false,
-      strictPort: true
+      port: 8374,
+      strictPort: true,
+      open: false
     },
     resolve: {
-      alias: [
-        {
-          find: /\/@\//,
-          replacement: pathResolve('src') + '/'
-        }
-      ]
+      alias: [{ find: '@/', replacement: pathResolve('src') + '/' }]
     },
+    build,
     css: {
       preprocessorOptions: {
-        scss: {
+        less: {
           // 自动导入scss变量，可在任意文件内访问，无需导入
-          additionalData: `@import "src/styles/variables.module.scss";`
-        }
-      }
-    },
-    optimizeDeps: {
-      include: ['vant']
-    },
-    build: {
-      target: 'es2015',
-      outDir: 'dist',
-      assetsDir: 'assets',
-      assetsInlineLimit: 2048,
-      cssCodeSplit: true,
-      minify: isEnvProduction ? 'terser' : 'esbuild',
-      terserOptions: {
-        compress: {
-          drop_console: isEnvProduction
+          additionalData: `@import "src/styles/variables.module.less";`
         }
       }
     }
