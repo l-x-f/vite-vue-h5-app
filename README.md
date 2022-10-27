@@ -6,6 +6,10 @@
 Vue 3 + Typescript + Vite + Vant
 ```
 
+## 预览
+
+![首页](./preview/1.jpg)![我](./preview/2.jpg)
+
 ## 开发环境
 
 | 类型          | 名称              | 版本           |

@@ -1,43 +1,76 @@
 <template>
   <div class="home">
-    <van-notice-bar left-icon="volume-o" :text="userInfo.username" />
+    <van-notice-bar left-icon="volume-o" :text="userInfo.username + '登录成功'" />
 
     <view class="swiper-wrapper">
       <AppSwiper :list="bannerList" />
     </view>
 
-    <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+    <van-pull-refresh v-model="pullRefreshLoading" @refresh="onRefresh">
       <van-list
         v-model:loading="loading"
         :finished="finished"
-        finished-text="没有更多了"
+        :finished-text="finishedText"
         @load="onLoad"
       >
         <van-card
-          v-for="(item, index) in list"
-          :key="index"
-          num="2"
-          price="2.00"
-          desc="描述信息"
-          title="商品标题"
-          thumb="https://fastly.jsdelivr.net/npm/@vant/assets/ipad.jpeg"
+          v-for="item in list"
+          :key="item.id"
+          :num="item.importance"
+          :price="item.money"
+          :desc="item.content"
+          :title="item.title"
+          :thumb="item.image"
         />
       </van-list>
     </van-pull-refresh>
+
+    <Tabbar />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { reactive, toRefs } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/store'
 import type { ISwipeItem } from '@/components/Swipe'
+import Tabbar from '@/components/Tabbar'
 import AppSwiper from '@/components/Swipe'
+import HomeServe from '@/api/list'
 
-const list = ref<number[]>([])
-const loading = ref(false)
-const finished = ref(false)
-const refreshing = ref(false)
+const DefaultPageInfo = {
+  page: 1,
+  pageSize: 10
+}
+
+interface Item {
+  id: number
+  importance: string
+  money: string
+  content: string
+  title: string
+  image: string
+}
+
+interface IState {
+  list: Item[]
+  pullRefreshLoading: boolean
+  loading: boolean
+  finishedText: string
+  finished: boolean
+  params: typeof DefaultPageInfo
+}
+
+const state: IState = reactive({
+  list: [],
+  // 下拉刷新
+  pullRefreshLoading: false,
+  // 上滑加载
+  loading: false,
+  finishedText: '加载中...',
+  finished: false,
+  params: { ...DefaultPageInfo }
+})
 
 const data = [
   'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg',
@@ -53,33 +86,44 @@ const store = useUserStore()
 
 const { userInfo } = storeToRefs(store)
 
+// 获取列表
+const getList = async () => {
+  try {
+    if (state.pullRefreshLoading) {
+      state.list = []
+      state.pullRefreshLoading = false
+    }
+    const { data } = await HomeServe.getList(state.params)
+    const list: Item[] = data.result || []
+    state.list = [...state.list, ...list]
+    if (state.params.page * state.params.pageSize >= data.total || !list.length) {
+      state.finished = true
+      state.finishedText = '没有更多了'
+    } else {
+      state.params.page += 1
+    }
+    state.loading = false
+  } catch (error) {
+    state.finished = true
+    state.finishedText = '没有更多了'
+  }
+}
+// 上滑加载
 const onLoad = () => {
-  setTimeout(() => {
-    if (refreshing.value) {
-      list.value = []
-      refreshing.value = false
-    }
-
-    for (let i = 0; i < 10; i++) {
-      list.value.push(list.value.length + 1)
-    }
-    loading.value = false
-
-    if (list.value.length >= 40) {
-      finished.value = true
-    }
-  }, 1000)
+  state.finishedText = '加载中...'
+  state.loading = true
+  getList()
 }
-
+// 下拉刷新
 const onRefresh = () => {
-  // 清空列表数据
-  finished.value = false
-
-  // 重新加载数据
-  // 将 loading 设置为 true，表示处于加载状态
-  loading.value = true
-  onLoad()
+  state.finishedText = '加载中...'
+  state.loading = true
+  state.finished = false
+  state.params.page = 1
+  getList()
 }
+
+const { list, pullRefreshLoading, loading, finishedText, finished } = toRefs(state)
 </script>
 
 <style lang="less" scoped>

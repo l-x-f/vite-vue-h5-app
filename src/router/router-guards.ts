@@ -14,8 +14,6 @@ router.beforeEach(async (to, _from, next) => {
   const store = useUserStore()
 
   if (!store.isLogin && to.path !== '/login') {
-    console.log('login')
-
     await store.logout()
     next({ path: '/login', replace: true })
   } else {
