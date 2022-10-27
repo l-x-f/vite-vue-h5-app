@@ -104,5 +104,9 @@
     "*{.js,.jsx,.ts,.tsx}": [
       "npm run lint"
     ]
+  },
+  "engines": {
+    "node": ">=16",
+    "yarn": "<2"
   }
 }
