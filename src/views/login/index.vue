@@ -5,7 +5,7 @@
       <van-form @submit="submitForm">
         <van-cell-group inset>
           <van-field
-            v-model="loginForm.userName"
+            v-model="loginForm.username"
             name="用户名"
             label="用户名"
             placeholder="用户名"
@@ -41,7 +41,7 @@ import { useUserStore } from '@/store'
 interface ILoginState {
   loading: boolean
   loginForm: {
-    userName: string
+    username: string
     password: string
   }
 }
@@ -53,8 +53,8 @@ const store = useUserStore()
 const state = reactive<ILoginState>({
   loading: false,
   loginForm: {
-    userName: '',
-    password: ''
+    username: 'admin',
+    password: '123456'
   }
 })
 // 登录
