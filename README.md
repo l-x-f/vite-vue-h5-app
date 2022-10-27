@@ -1,96 +1,103 @@
 # vite-vue-h5-app
 
-## 技术栈
+**English** | [中文](./README.zh-CN.md)
+
+## Technology
 
 ```code
 Vue 3 + Typescript + Vite + Vant
 ```
 
-## 预览
+## Preview
 
-![首页](./preview/1.jpg)![我](./preview/2.jpg)
+![home](./preview/1.jpg)![my](./preview/2.jpg)
 
-## 开发环境
+## Development environment
 
-| 类型          | 名称              | 版本           |
-| ------------- | ----------------- | -------------- |
-| 操作系统      | Windows 11 专业版 | 22000.1098     |
-| 开发工具      | Microsoft VS Code | 1.72.2         |
-| 调试工具      | Google Chrome     | 104.0.5112.102 |
-| 代码版本控制  | git               | 2.37.0         |
-| 语言环境      | node              | 16.13.0        |
-| 包管理器      | npm               | 8.1.3          |
-| 包管理器      | yarn              | 1.22.17        |
-| node 版本管理 | nvm               | 1.1.7          |
-| npm 源管理    | nrm               | 1.2.5          |
+| type                    | name                    | version        |
+| ----------------------- | ----------------------- | -------------- |
+| operating system        | Windows 11 professional | 22000.1098     |
+| development tool        | Microsoft VS Code       | 1.72.2         |
+| debugging tools         | Google Chrome           | 104.0.5112.102 |
+| code version control    | git                     | 2.37.0         |
+| environment             | node                    | 16.13.0        |
+| package manager         | npm                     | 8.1.3          |
+| package manager         | yarn                    | 1.22.17        |
+| node version management | nvm                     | 1.1.7          |
+| npm origin management   | nrm                     | 1.2.5          |
 
-## 项目结构
+## Project Structure
 
 ```sh
 .
-├── README.md                           #项目简介
-├── commitlint.config.js                #commitlint配置
-├── cypress                             #单元测试 端到端测试
-├── index.html                          #页面入口
+├── README.md                           #Project introduction
+├── README.zh-CN.md                     #Project introduction
+├── commitlint.config.js                #commitlint config
+├── cypress                             #unit testing , End to end testing
+├── index.html                          #entry
 ├── mock                                #mock
 ├── package.json                        #package
-├── postcss.config.js                   #postcss配置
-├── public                              #静态文件
+├── postcss.config.js                   #postcss config
+├── public                              # public file
 │   ├── favicon.ico                     #icon
-├── src                                 #核心源码
-│   ├── App.vue                         #根组件
-│   ├── api                             #接口
-│   ├── assets                          #资源
-│   ├── components                      #组件
-│   ├── icons                           #svg图标
-│   ├── main.ts                         #项目入口
-│   ├── router                          #路由，导航守卫
-│   ├── store                           #数据仓库
-│   ├── styles                          #全局样式和样式变量
-│   ├── utils                           #工具函数
-│   └── views                           #业务页面
-├── types                               #ts类型
-├── tsconfig.json                       #ts项目配置
-├── update.sh                           #提交代码脚本
-├── viteConfig                          #vite配置
-├── vite.config.ts                      #vite项目配置
-└── yarn.lock                           #npm包版本锁定
+├── src                                 # core code
+│   ├── App.vue                         #root component
+│   ├── api                             #api
+│   ├── assets                          #assets
+│   ├── components                      #components
+│   ├── icons                           #svg icons
+│   ├── main.ts                         #entry
+│   ├── router                          #router ,router-guards
+│   ├── store                           #store
+│   ├── styles                          #styles
+│   ├── utils                           #utils
+│   └── views                           #views
+├── types                               #ts type
+├── tsconfig.json                       #ts config
+├── update.sh                           #commit code
+├── viteConfig                          #vite config
+├── vite.config.ts                      #vite config
+└── yarn.lock                           #npm lock
 ```
 
-## 项目启动
+## Project setup
 
-### 安装依赖
+### Installation Dependencies
 
 ```sh
 yarn
 ```
 
-### 开启开发环境
+### Compiles and hot-reloads for development
 
 ```sh
 yarn dev
 ```
 
-## 代码检验
+## Code lints and fixes files
 
 ```sh
 yarn lint
 ```
 
-## 样式检验
+## Style lint and fixes files
 
 ```sh
 yarn stylelint
 ```
 
-## 代码提交
+## Code commit
 
 ```sh
  ./update.sh
 ```
 
-## 打包部署
+## Compiles and minifies for production
 
 ```sh
 yarn build:prod
 ```
+
+## License
+
+MIT
