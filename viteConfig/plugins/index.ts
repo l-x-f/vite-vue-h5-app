@@ -36,7 +36,8 @@ export default function registerPlugins(options: RegisterPluginsParams): VitePlu
     vueJsx(),
     Components({
       resolvers: [VantResolver()],
-      dts: false
+      dts: false,
+      directoryAsNamespace: true
     })
   ]
 

@@ -9,14 +9,14 @@
 </template>
 
 <script lang="ts" setup>
-import type { ISwipeItem } from './type'
+import type { SwipeItem } from './type'
 
 defineOptions({
   name: 'AppSwipe'
 })
 
 interface IProps {
-  list: ISwipeItem[]
+  list: SwipeItem[]
 }
 
 withDefaults(defineProps<IProps>(), {
@@ -25,7 +25,7 @@ withDefaults(defineProps<IProps>(), {
 
 const emit = defineEmits(['clickItem'])
 
-const onClick = (item: ISwipeItem) => {
+const onClick = (item: SwipeItem) => {
   emit('clickItem', item)
 }
 </script>

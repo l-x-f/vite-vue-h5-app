@@ -1,7 +1,7 @@
 /**
  * 用户状态类型
  */
-declare interface IUserStoreState {
+declare interface UserStoreState {
   token?: string
   userInfo: {
     username: string
@@ -10,4 +10,4 @@ declare interface IUserStoreState {
   }
 }
 
-declare type IUserUserInfo = IUserStoreState['userInfo']
+declare type UserInfo = UserStoreState['userInfo']

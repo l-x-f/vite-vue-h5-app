@@ -9,6 +9,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "isolatedModules": true,
+    "skipLibCheck": true,
     "lib": ["esnext", "dom"],
     "types": ["vite/client", "node", "unplugin-vue-define-options/macros-global"],
     "baseUrl": ".",

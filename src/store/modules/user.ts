@@ -3,7 +3,7 @@ import { setUserInfo, getUserInfo, removeUserInfo } from '@/utils/storage'
 import { login, logout } from '@/api/login'
 
 const useUserStore = defineStore('user', {
-  state: (): IUserStoreState => {
+  state: (): UserStoreState => {
     return {
       token: getUserInfo().token || '',
       userInfo: getUserInfo().userInfo || {}
@@ -13,13 +13,13 @@ const useUserStore = defineStore('user', {
     isLogin: state => !!state.token
   },
   actions: {
-    setUserInfo(userInfo: IUserUserInfo) {
+    setUserInfo(userInfo: UserInfo) {
       this.userInfo = userInfo
     },
     setToken(token: string) {
       this.token = token
     },
-    async login(userForm: IUserUserInfo) {
+    async login(userForm: UserInfo) {
       try {
         const { data } = await login(userForm)
         setUserInfo(data)

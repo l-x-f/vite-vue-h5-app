@@ -5,7 +5,7 @@ import banner from 'vite-plugin-banner'
 import type { VitePlugins, RegisterPluginsParams } from '../type'
 import pkg from '../../package.json'
 
-const registerProdPlugins = ({ outDir }: RegisterPluginsParams): VitePlugins => {
+const registerProdPlugins = (option: RegisterPluginsParams): VitePlugins => {
   const plugins: VitePlugins = [
     // gzip插件
     viteCompression({
@@ -15,7 +15,6 @@ const registerProdPlugins = ({ outDir }: RegisterPluginsParams): VitePlugins => 
     }),
     // 添加版权注释
     banner({
-      outDir,
       content: `/**\n * name: ${pkg.name}\n * version: v${pkg.version}\n * description: ${pkg.description}\n * author: ${pkg.author}\n * copyright: ${pkg.copyright}\n */`
     })
   ]

@@ -1,4 +1,4 @@
-import type { AxiosResponse } from 'axios'
+import type { AxiosResponse, AxiosRequestHeaders } from 'axios'
 import axios from 'axios'
 import { Toast } from 'vant'
 import { useUserStore } from '@/store'
@@ -20,7 +20,7 @@ const errorHandler = (error: { message: string }) => {
 // 请求拦截器
 request.interceptors.request.use(config => {
   const { token } = useUserStore()
-  const headers = { ...config.headers }
+  const headers = { ...config.headers } as AxiosRequestHeaders
   // 如果 token 存在
   if (token) {
     headers.token = token
