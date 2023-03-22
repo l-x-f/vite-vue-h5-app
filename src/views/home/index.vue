@@ -33,7 +33,7 @@
 import { reactive, toRefs } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/store'
-import type { ISwipeItem } from '@/components/Swipe'
+import type { SwipeItem } from '@/components/Swipe'
 import Tabbar from '@/components/Tabbar'
 import AppSwiper from '@/components/Swipe'
 import HomeServe from '@/api/list'
@@ -80,7 +80,7 @@ const data = [
   'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg'
 ]
 
-const bannerList: ISwipeItem[] = data.map(item => ({ url: item }))
+const bannerList: SwipeItem[] = data.map(item => ({ url: item }))
 
 const store = useUserStore()
 

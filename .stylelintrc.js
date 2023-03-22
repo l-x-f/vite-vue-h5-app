@@ -1,10 +1,15 @@
 module.exports = {
-  defaultSeverity: 'error',
-  customSyntax: 'postcss-html',
   extends: [
     'stylelint-config-standard',
-    'stylelint-config-recommended-less',
-    'stylelint-config-recommended-vue'
+    'stylelint-config-html',
+    'stylelint-config-recommended-vue',
+    'stylelint-config-recommended-less'
+  ],
+  overrides: [
+    {
+      files: ['*.less', '**/*.less'],
+      customSyntax: 'postcss-less'
+    }
   ],
   plugins: ['stylelint-order'],
   rules: {
